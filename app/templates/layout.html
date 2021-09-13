@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://unpkg.com/vue"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    {% endblock %}
   </head>
-  
-  
   <body>
-  ToDo Tasks! 
-
-
-    
+    <div id="navbar">
+      {% block navbar %}
+      <!---estas secciones son vistas por cualquier usuario-->
+      <div
+        class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
+      >
+        <div class="my-0 mr-md-auto font-weight-normal">
+          <a href="#">
+            <img
+              src="{{ url_for('static', filename = 'img/logo.jpg') }}"
+              alt="logo"
+              width="100"
+              height="100"
+              id="logo"
+            />
+          </a>
+        </div>
+        <div class="my-0 mr-md-auto font-weight-normal">
+          <a href="#">
+            Login
+          </a>
+        </div>
+        
+    {% endblock %}
   </body>
 </html>
