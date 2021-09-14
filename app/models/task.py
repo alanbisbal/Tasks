@@ -7,10 +7,10 @@ from app.models import folder
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True)
+    name = db.Column(db.String(80), unique=False)
     folder_id = db.Column(db.Integer, db.ForeignKey('folder.id'))
-    folder = relationship("Folder", backref="folder")
-    
+    folder = relationship("Folder", back_populates="tasks")
+
 
     def __init__(self, data):
        self.name = data['name']
@@ -25,4 +25,5 @@ class Task(db.Model):
     def add(data):  
         db.session.add(Task(data))
         db.session.commit()
+    
         

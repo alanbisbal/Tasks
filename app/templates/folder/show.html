@@ -6,13 +6,12 @@
     <div class="card-body">
 
 
-        {% if folders|length == 0 %}
-        <div class="my-0 mr-md-auto font-weight-normal">You dont have folders  </div> 
-      
-        {% else %}
-        {% for folder in folders %}
+        {% if folder %}
+          {{folder.name}}
+        {% for task in folder.tasks %}
+       
         <div >
-          <li><a href="{{url_for('folder_show',folder_id = folder.id)}}">{{ folder.name }}</a>
+          <li><a href="">{{ task.name }}</a>
            <div >
              <a href="">edit</a>
              <a href=""> delete</a>
@@ -20,14 +19,12 @@
              
           </li>
         </div>
+       
+
+
         {% endfor %}
   
         {% endif %}
-
-        <div class="my-0 mr-md-auto font-weight-normal">
-            <a class="btn btn-link" href="{{ url_for('folder_new') }}">New folder!</a>
-         </div>
-
 
       
        </div> 

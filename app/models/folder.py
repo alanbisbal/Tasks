@@ -7,12 +7,12 @@ from app.models import user,task
 
 class Folder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True)
-    tasks = db.relationship("Task", backref="tasks")
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = relationship("User", backref="user")
-    tasks = db.relationship("Task", backref="tasks")
+    name = db.Column(db.String(80), unique=False)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="folders")
+    
+    tasks = db.relationship("Task", back_populates="folder")
 
 
     def __init__(self, data):
@@ -28,3 +28,5 @@ class Folder(db.Model):
         db.session.add(Folder(data))
         db.session.commit()
         
+    def all():
+        return db.session.query(Folder).all()

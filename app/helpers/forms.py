@@ -12,7 +12,7 @@ import requests, time
 
 
 class UserNewForm(FlaskForm):
-    username = StringField('Name', validators=[InputRequired()])
+    username = StringField('Username', validators=[InputRequired()])
     email = EmailField('Email', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
     submit = SubmitField(label="Guardar")
@@ -25,5 +25,10 @@ class UserLoginForm(FlaskForm):
 
 class FormNewFolder(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
-    user_id = HiddenField(validators=[InputRequired()])
-    submit = SubmitField(label="Guardar")
+    user_id = HiddenField()
+
+
+class FolderForm(FlaskForm):
+    name = StringField('Name', validators=[InputRequired()])
+    user_id = HiddenField()
+  

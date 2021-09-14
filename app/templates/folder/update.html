@@ -8,13 +8,13 @@
 
 
             <form
-              action="{{ url_for('folder_create') }}"
+              action="{{  }}"
               method="POST"
               enctype="multipart/form-data"
             >
             
 
-            <h5 class="card-title text-center">New Folder</h5>
+            <h5 class="card-title text-center">Edit Folder</h5>
               <div class="card-body">
                 <div class="form-group">
                   {{ form.csrf_token }} {% if form.csrf_token.errors %}
@@ -24,15 +24,13 @@
                   {{wtf.form_field(form.name)}}
                 
                 </div>
-        
-              
                 <button
                 class="btn btn-lg btn-primary btn-block text-uppercase"
                 type="submit"
-                value="Register"
+                value="Edit"
                  >
                  
-                 Create
+                 Edit
                 </button>
               </div>
             </form> 

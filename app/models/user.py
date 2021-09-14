@@ -10,7 +10,10 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120), unique=False)
-    folders = db.relationship("Folder", backref="folders")
+
+
+    folders = db.relationship("Folder", back_populates="user")
+
     
     def __init__(self, data):
        self.username = data['username']

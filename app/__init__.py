@@ -15,15 +15,17 @@ db = SQLAlchemy()
 def create_app(environment="development"):
     # Configuración inicial de la app
     app = Flask(__name__)
-
+    
     
     Bootstrap(app)
 
     app.config['SECRET_KEY'] = 'ThisIsAVerySecretKey'
     # Server Side session
     app.config["SESSION_TYPE"] = "filesystem"
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
     Session(app)
-
+    
     
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/tasks'
    
@@ -51,10 +53,11 @@ def create_app(environment="development"):
 
     app.add_url_rule("/index", "folder_index", folder.index)              
     app.add_url_rule("/folder/new", "folder_new", folder.new)  
-    app.add_url_rule("/folder/create",
-                     "folder_create",
-                     folder.create,
-                     methods=["POST"])      
+    app.add_url_rule("/folder/create", "folder_create", folder.create,methods=["POST"]) 
+    app.add_url_rule("/folder/show/<folder_id>", "folder_show", folder.show)                                     
+    app.add_url_rule("/centros/update/<centro_id>", "folder_update", folder.update)
+    app.add_url_rule("/folder/update","folder_update_new",folder.update_new,methods=["POST"])
+    app.add_url_rule("/folder/delete","folder_delete",folder.delete, methods=["POST"])
     @app.route("/")
 
     
