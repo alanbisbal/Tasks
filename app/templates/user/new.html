@@ -1,0 +1,55 @@
+{% extends "layout.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+  title %}Turnos{% endblock %} {% block head %} {{ super() }} {% endblock %} {%
+  block content %}
+        
+        <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
+          <div class="card">
+          <div class="card-body">
+            <form
+              action="{{ url_for('auth_register') }}"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+            <center>
+              <svg
+                style="text-align: center"
+                width="3em"
+                height="3em"
+                viewBox="0 0 16 16"
+                class="bi bi-person-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                />
+              </svg>
+            </center>
+            <h5 class="card-title text-center">Register</h5>
+              <div class="card-body">
+                <div class="form-group">
+                  {{ form.csrf_token }} {% if form.csrf_token.errors %}
+                 <div class="warning">You have submitted an invalid CSRF token</div>
+                  {% endif %} {{wtf.form_field(form.email)}}
+               
+                  {{wtf.form_field(form.username)}}
+                  {{wtf.form_field(form.password)}}
+                
+                </div>
+        
+              
+                <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                type="submit"
+                value="Register"
+                 >
+                 
+                 Register now!
+                </button>
+              </div>
+            </form>  
+          </div>
+        </div>
+          {% endblock %}
+        </div>

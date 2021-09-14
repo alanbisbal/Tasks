@@ -15,11 +15,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+   
     <title>{% block title %}{% endblock %}</title>
     <script src="https://unpkg.com/vue"></script>
 
@@ -45,22 +41,96 @@
         class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
       >
         <div class="my-0 mr-md-auto font-weight-normal">
-          <a href="#">
-            <img
-              src="{{ url_for('static', filename = 'img/logo.jpg') }}"
-              alt="logo"
-              width="100"
-              height="100"
-              id="logo"
-            />
+          <a class="btn btn-link" href="{{ url_for('home') }}">Home</a>
+         
           </a>
         </div>
-        <div class="my-0 mr-md-auto font-weight-normal">
-          <a href="#">
-            Login
-          </a>
+
+        <nav class="my-2 my-md-0 mr-md-3">
+          {% if not is_authenticated(session) %}
+
+         
+          <a href="{{ url_for('auth_signin') }}" class="btn btn-link"
+          >Sign In</a
+           > 
+          <a href="{{ url_for('auth_login') }}" class="btn btn-link"
+            >Login</a
+          >
+          {% else %}
+         
+        </nav>
+
+        <a
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >Welcome {{session.username}} !</a
+        >
+        <div class="dropdown-menu">
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ url_for('auth_logout') }}"
+            >Logout</a
+          >
         </div>
-        
+
+
+        {% endif %}
+      </div>
+      {% endblock %}
+    </div>
+    <div id="content">
+      {% with messages= get_flashed_messages(with_categories=true)%} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="alert alert-{{ category }} alert-dismissible fade show"
+        role="alert"
+      >
+        <span>{{ message }}</span>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    </div>
+
+    
+    <div id="footer">
+      <hr class="my-4" />
+      {% block footer %}
+      <div class="row container">
+        <p class="p-1">
+          Bisbal, Alan Nicolas &copy;
+        </p>
+      </div>
+
+      {% endblock %}
+    </div>
+    {% block scripts %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
     {% endblock %}
   </body>
 </html>
