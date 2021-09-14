@@ -6,6 +6,14 @@
     <div class="mt-2 container">
       <div class="row">
         <div class="col-12">
+          {% if is_authenticated(session) %}
+          <div class="my-0 mr-md-auto font-weight-normal">
+            <a class="btn btn-link" href="{{ url_for('folder_index') }}">Folders</a>
+
+           </div>
+         
+          
+          {% endif %}
           <h1 class="display-5 mb-3 mt-5 text-break">{{ "Organize it all
             with TaskToDo" }}</h1>
 

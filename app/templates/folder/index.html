@@ -1,0 +1,28 @@
+{% extends "layout.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+  title %}{% endblock %} {% block head %} {{ super() }} {% endblock %} {%
+  block content %}
+  <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
+    <div class="card">
+    <div class="card-body">
+
+
+        {% if folders|length == 0 %}
+        <div class="my-0 mr-md-auto font-weight-normal">You dont have folders  </div> 
+      
+        {% else %}
+        {% for item in folders %}
+          <li><a href="">{{ item.name }}</a></li>
+        {% endfor %}
+  
+        {% endif %}
+
+        <div class="my-0 mr-md-auto font-weight-normal">
+            <a class="btn btn-link" href="{{ url_for('folder_new') }}">New folder!</a>
+         </div>
+
+
+      
+       </div> 
+      </div> 
+    </div>   
+        {% endblock %}

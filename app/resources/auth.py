@@ -25,7 +25,6 @@ def signin():
 def authenticate():
     """
     Este método realiza la autenticación de un usuario teniendo en cuenta si los datos ingresados son correctos,
-    si el usuario se encuntra o no activo y si la pagina está o no habilitada
 
     """
 
@@ -88,7 +87,7 @@ def register():
         user= User.with_username_and_password(data)
         session["user"] = user.email
         session["username"] = user.username
-        flash("Logged! .", "success")
+        flash("Welcome!", "success")
     except:
         return redirect(request.referrer)
     return redirect(url_for("home"))

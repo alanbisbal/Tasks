@@ -3,12 +3,14 @@ from flask import request
 
 from sqlalchemy.orm import relationship
 from sqlalchemy import Table, Column, Integer, ForeignKey
+from app.models import folder
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120), unique=False)
+    folders = db.relationship("Folder", backref="folders")
     
     def __init__(self, data):
        self.username = data['username']
@@ -20,8 +22,7 @@ class User(db.Model):
     def __str__(self):
         return '<User {}>'.format(self.username)
 
-    def add(data):
-        
+    def add(data):  
         db.session.add(User(data))
         db.session.commit()
         

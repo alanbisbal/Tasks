@@ -3,7 +3,7 @@ from flask import Flask, jsonify ,render_template, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from app.db import db
-from app.resources import auth
+from app.resources import auth,folder,user,task
 from app.helpers import auth as helper_auth
 from flask_bootstrap import Bootstrap
 
@@ -44,8 +44,17 @@ def create_app(environment="development"):
     app.add_url_rule("/register",
                     "auth_register",
                     auth.register,
-                    methods=["POST"])                
+                    methods=["POST"])   
 
+
+    # Folders 
+
+    app.add_url_rule("/index", "folder_index", folder.index)              
+    app.add_url_rule("/folder/new", "folder_new", folder.new)  
+    app.add_url_rule("/folder/create",
+                     "folder_create",
+                     folder.create,
+                     methods=["POST"])      
     @app.route("/")
 
     

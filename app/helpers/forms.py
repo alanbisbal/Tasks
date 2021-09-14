@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, \
                     TimeField, IntegerField, SelectField, BooleanField, \
                     DateField, FloatField, DecimalField
 from flask_wtf.file import FileField
-from wtforms.fields.simple import PasswordField
+from wtforms.fields.simple import HiddenField, PasswordField
 from wtforms.validators import InputRequired, NumberRange, Regexp, DataRequired, Optional, EqualTo, Regexp, Email
 from wtforms.fields.html5 import EmailField
 from wtforms.widgets.html5 import NumberInput
@@ -23,3 +23,7 @@ class UserLoginForm(FlaskForm):
     submit = SubmitField(label="Guardar")
 
 
+class FormNewFolder(FlaskForm):
+    name = StringField('Name', validators=[InputRequired()])
+    user_id = HiddenField(validators=[InputRequired()])
+    submit = SubmitField(label="Guardar")
