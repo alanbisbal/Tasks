@@ -32,8 +32,7 @@ class Task(db.Model):
         return db.session.query(Task).get(data)
     
     def completed(self):
-        
-        print("asd")
+    
         self.state = 1
         db.session.commit()
 
@@ -48,7 +47,6 @@ class Task(db.Model):
         db.session.commit()
     
     def delete(self):
-        print("asd")
         db.session.delete(self)
         db.session.commit()
         

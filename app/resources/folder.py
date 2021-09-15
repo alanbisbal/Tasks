@@ -9,6 +9,7 @@ from app.helpers.validates import sanitizar_input
 def index():
     if not authenticated(session):
         return redirect(url_for("home"))
+        
     folders = User.with_id(session["id"]).folders
     return render_template("folder/index.html",folders=folders)
 

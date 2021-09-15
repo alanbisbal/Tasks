@@ -4,16 +4,23 @@ content %}
 <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
   <div class="card">
     <div class="card-body">
-      Name folder: {{folder.name}} {% if folder.tasks |length == 0 %}
+      <p class="text-secondary">Folder name:</p>
+      {{folder.name}}</div>
+      {% if folder.tasks |length == 0 %}
       <div class="my-0 mr-md-auto font-weight-normal">You dont have tasks</div>
 
-      {% else %} {% for task in folder.tasks %}
-
+      {% else %}
+      <div>  <p class="text-secondary">Tasks</p>
+      </div>
+      {% for task in folder.tasks %}
+      
       <div class="breadcrumb">
         <a href="{{url_for('task_show',task_id = task.id)}}">{{ task.name }}</a>
       </div>
-      <div>
-        State: {% if task.state %} completed {% else %} in progess {% endif%}
+      <div class="breadcrumb">
+        State: {% if task.state %} <p class="text-success"> completed</p>
+         {% else %} 
+        <p class="text-warning"> in progess</p> {% endif%}
       </div>
 
       <br />
