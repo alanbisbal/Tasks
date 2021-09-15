@@ -1,13 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, \
-                    TimeField, IntegerField, SelectField, BooleanField, \
-                    DateField, FloatField, DecimalField
-from flask_wtf.file import FileField
+from wtforms import StringField, SubmitField
 from wtforms.fields.simple import HiddenField, PasswordField
-from wtforms.validators import InputRequired, NumberRange, Regexp, DataRequired, Optional, EqualTo, Regexp, Email
+from wtforms.validators import InputRequired
 from wtforms.fields.html5 import EmailField
-from wtforms.widgets.html5 import NumberInput
-import requests, time
+
 # from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 
@@ -31,4 +27,6 @@ class FormNewFolder(FlaskForm):
 class FolderForm(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
     user_id = HiddenField()
+    id = HiddenField()
+    
   

@@ -30,3 +30,17 @@ class Folder(db.Model):
         
     def all():
         return db.session.query(Folder).all()
+
+    def with_id(data):
+        return db.session.query(Folder).get(data)
+    
+
+    def update(self, data):
+        if self.name != data['name']:
+           self.name = data['name']
+        db.session.commit()
+
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

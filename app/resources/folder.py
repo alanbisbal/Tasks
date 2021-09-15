@@ -3,7 +3,7 @@ from flask import redirect, render_template, request, url_for, abort, session, f
 from app import db
 from app.models.user import User
 from app.models.folder import Folder
-from app.helpers.forms import FormNewFolder, FolderForm
+from app.helpers.forms import FolderForm
 from app.helpers.auth import authenticated
 from app.helpers.validates import sanitizar_input
 
@@ -17,6 +17,7 @@ def index():
 def show(folder_id):
     if not authenticated(session):
         return redirect(url_for("home"))
+    print(folder_id)
     folder = Folder.with_id(folder_id)
     return render_template("folder/show.html",folder=folder)
 
@@ -29,45 +30,68 @@ def new():
 
 def create():
     form = FolderForm()
+    folders = User.with_id(session["id"]).folders
+    if any(folder.name == form.name.data for folder in folders):
+         flash("The name is alredy in use")
+         return redirect(request.referrer)
     form.user_id.data = session["id"]
     if not form.validate_on_submit():
         print(form.data)
         return redirect(request.referrer)
     sanitizar_input(form)
-    print(form.data)
     Folder.add(form.data)
-    
     folders = User.with_id(session["id"]).folders
     return render_template("folder/index.html",folders=folders)
 
 
-def update(folder_id):
+def edit(folder_id):
     if not authenticated(session):
        return redirect(url_for("home"))
-    
+
     "validar que sea del usuario logeado"
-
-    folder = Folder.get(folder_id)
+    folder = Folder.with_id(folder_id)
+    folders = User.with_id(session["id"]).folders
+    if not folder in folders:
+        return redirect(request.referrer)
     form = FolderForm()
-    folders = Folder.all()
-    return render_template("folder/index.html",folders=folders)
+    form.name.data = folder.name
+    form.id.data = folder.id
+    return render_template("folder/edit.html",form=form)
 
 
-def update_new():
+def update():
     if not authenticated(session):
        return redirect(url_for("home"))
     
     
+    folders = User.with_id(session["id"]).folders
+    folder = Folder.with_id(request.form["folder_id"])
+    if not folder in folders:
+       return redirect(request.referrer)
+   
+   
+    if any(folder.name == request.form["name"] for folder in folders):
+        flash("The name is alredy in use")
+        return redirect(request.referrer)
 
-    folders = Folder.all()
+    folder.update(request.form)
     return render_template("folder/index.html",folders=folders)
+
 
     
 def delete():
+
     if not authenticated(session):
        return redirect(url_for("home"))
     
     folders = User.with_id(session["id"]).folders
-    
+    folder = Folder.with_id(request.form["folder_id"])
+    if not folder in folders:
+       return redirect(request.referrer)
+   
+
+    folder = Folder.with_id(request.form["folder_id"])
+    folder.delete() 
+    folders = User.with_id(session["id"]).folders
     return render_template("folder/index.html",folders=folders)
 

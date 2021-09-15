@@ -11,15 +11,36 @@
       
         {% else %}
         {% for folder in folders %}
-        <div >
-          <li><a href="{{url_for('folder_show',folder_id = folder.id)}}">{{ folder.name }}</a>
-           <div >
-             <a href="">edit</a>
-             <a href=""> delete</a>
+        <div class="breadcrumb">
+         <a  href="{{url_for('folder_show',folder_id = folder.id)}}">{{ folder.name }}</a>
+        </div>
+        
+         <div class="d-flex justify-content-end">
+           
+          <a class="badge badge-secondary" href="{{url_for('folder_edit',folder_id = folder.id)}}">edit</a>
+            <form
+            action="{{url_for('folder_delete',folder_id = folder.id)}}"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+           
+            <input
+              type="hidden"
+              id="folder_id"
+              name="folder_id"
+              value="{{folder.id}}"
+            />
+            <button
+              type="submite"
+              class="badge badge-danger"
+              onclick="return ConfirmDelete()"
+            >
+              delete
+            </button>
            </div>  
              
-          </li>
-        </div>
+         <br>
+        
         {% endfor %}
   
         {% endif %}
@@ -28,7 +49,12 @@
             <a class="btn btn-link" href="{{ url_for('folder_new') }}">New folder!</a>
          </div>
 
-
+         <script type="text/javascript">
+          function ConfirmDelete() {
+            return confirm('Are you sure?');
+          }
+        </script>
+    
       
        </div> 
       </div> 

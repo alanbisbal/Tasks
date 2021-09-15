@@ -11,7 +11,9 @@ def login():
     if authenticated(session):
         return redirect(url_for("home"))
     # retorna vista de creacion de usuario
+    
     form=UserLoginForm()
+    
     return render_template("auth/login.html",form=form)
 
 
@@ -23,9 +25,9 @@ def signin():
     return render_template("user/new.html", form=form)
 
 def authenticate():
-    """
-    Este método realiza la autenticación de un usuario teniendo en cuenta si los datos ingresados son correctos,
 
+    """
+    Este método realiza la autenticación de un usuario teniendo en cuenta si los datos ingresados son correctos
     """
 
     user = User.with_username_and_password(request.form)
@@ -88,6 +90,7 @@ def register():
         user= User.with_username_and_password(data)
         session["user"] = user.email
         session["username"] = user.username
+        session["id"] = user.id
         flash("Welcome!", "success")
     except:
         return redirect(request.referrer)

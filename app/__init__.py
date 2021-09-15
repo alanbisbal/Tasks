@@ -55,8 +55,8 @@ def create_app(environment="development"):
     app.add_url_rule("/folder/new", "folder_new", folder.new)  
     app.add_url_rule("/folder/create", "folder_create", folder.create,methods=["POST"]) 
     app.add_url_rule("/folder/show/<folder_id>", "folder_show", folder.show)                                     
-    app.add_url_rule("/centros/update/<centro_id>", "folder_update", folder.update)
-    app.add_url_rule("/folder/update","folder_update_new",folder.update_new,methods=["POST"])
+    app.add_url_rule("/folder/edit/<folder_id>", "folder_edit", folder.edit)
+    app.add_url_rule("/folder/update","folder_update",folder.update,methods=["POST"])
     app.add_url_rule("/folder/delete","folder_delete",folder.delete, methods=["POST"])
     @app.route("/")
 
