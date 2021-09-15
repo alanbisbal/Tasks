@@ -1,0 +1,46 @@
+{% extends "layout.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+  title %}{% endblock %} {% block head %} {{ super() }} {% endblock %} {%
+  block content %}
+  
+  <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
+    <div class="card">
+    <div class="card-body">
+
+
+            <form
+              action="{{url_for('task_update')}}"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+            
+
+            <h5 class="card-title text-center">Edit Task</h5>
+              <div class="card-body">
+                <div class="form-group">
+                  {{ form.csrf_token }} {% if form.csrf_token.errors %}
+                 <div class="warning">You have submitted an invalid CSRF token</div>
+                  {% endif %}
+
+                  
+                  
+                  {{wtf.form_field(form.name)}}
+                </div>
+                <input type="hidden" class="form-control" id="folder_id" name="folder_id" value="{{form.id.data}}">
+
+
+                <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                type="submit"
+                value="Edit"
+                 >
+                 
+                 Edit
+                </button>
+              </div>
+            </form> 
+        
+        </div>
+      </div>
+      </div>
+    </div>
+            {% endblock %} 

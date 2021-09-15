@@ -35,7 +35,6 @@ def create():
          return redirect(request.referrer)
     
     if not form.validate_on_submit():
-        print(form.errors)
         return redirect(request.referrer)
     
     sanitizar_input(form)
@@ -50,20 +49,40 @@ def show(task_id):
     form = FormTaskState()
     return render_template("task/show.html", task= task,form=form)
 
-def edit():
+def edit(task_id):
+    if not authenticated(session):
+      return redirect(url_for("home"))
+
+    "validar que sea del usuario logeado"
     """
     """
-    return render_template("task/index.html")
+    task = Task.with_id(task_id)
+    form = FormTask()
+    form.name.data = task.name
+    form.id.data = task.id
+    return render_template("task/edit.html", form = form)
 
 def update():
     """
     """
-    return render_template("task/index.html")
+
+
+
+    task = Task.with_id(request.form["folder_id"])
+    form = FormTaskState()
+    task.update(request.form)
+
+    return render_template("task/show.html", task= task,form=form)
 
 def delete():
     """
     """
-    return render_template("task/index.html")
+    task = Task.with_id(request.form["task_id"])
+    folder = task.folder
+
+    task.delete() 
+
+    return redirect(url_for('folder_show',folder_id = folder.id))
 
 def completed():
     """

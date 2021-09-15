@@ -42,4 +42,13 @@ class Task(db.Model):
         db.session.commit()
 
 
+    def update(self, data):
+        if self.name != data['name']:
+           self.name = data['name']
+        db.session.commit()
+    
+    def delete(self):
+        print("asd")
+        db.session.delete(self)
+        db.session.commit()
         
