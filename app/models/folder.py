@@ -12,7 +12,7 @@ class Folder(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="folders")
     
-    tasks = db.relationship("Task", back_populates="folder")
+    tasks = db.relationship("Task",cascade="all,delete", back_populates="folder")
 
 
     def __init__(self, data):

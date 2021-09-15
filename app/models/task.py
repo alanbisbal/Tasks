@@ -8,6 +8,7 @@ from app.models import folder
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False)
+    state = db.Column(db.Boolean, nullable=False)
     folder_id = db.Column(db.Integer, db.ForeignKey('folder.id'))
     folder = relationship("Folder", back_populates="tasks")
 
@@ -15,6 +16,7 @@ class Task(db.Model):
     def __init__(self, data):
        self.name = data['name']
        self.folder_id = data['folder_id']
+       self.state = 0
        db.session.commit()
         
     @classmethod
@@ -25,5 +27,19 @@ class Task(db.Model):
     def add(data):  
         db.session.add(Task(data))
         db.session.commit()
+
+    def with_id(data):
+        return db.session.query(Task).get(data)
     
+    def completed(self):
+        
+        print("asd")
+        self.state = 1
+        db.session.commit()
+
+    def inprogress(self):
+        self.state = 0
+        db.session.commit()
+
+
         

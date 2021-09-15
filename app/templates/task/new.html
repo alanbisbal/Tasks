@@ -7,7 +7,36 @@
     <div class="card-body">
 
 
-        New Task!
+        
+        <form
+              action="{{ url_for('task_create') }}"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+            
+
+            <h5 class="card-title text-center">New Task!</h5>
+              <div class="card-body">
+                <div class="form-group">
+                  {{ form.csrf_token }} {% if form.csrf_token.errors %}
+                 <div class="warning">You have submitted an invalid CSRF token</div>
+                  {% endif %}
+                  {{form.folder_id}}
+                  {{wtf.form_field(form.name)}}
+                  
+                </div>
+        
+              
+                <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                type="submit"
+                value="Create"
+                 >
+                 
+                 Create
+                </button>
+              </div>
+            </form> 
         
         </div>
       </div>

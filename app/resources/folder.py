@@ -1,6 +1,5 @@
-from flask import redirect, render_template, request, url_for, abort, session, flash
+from flask import redirect, render_template, request, url_for, session, flash
 
-from app import db
 from app.models.user import User
 from app.models.folder import Folder
 from app.helpers.forms import FolderForm

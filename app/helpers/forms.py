@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from wtforms.fields.core import BooleanField
 from wtforms.fields.simple import HiddenField, PasswordField
 from wtforms.validators import InputRequired
 from wtforms.fields.html5 import EmailField
@@ -28,5 +29,13 @@ class FolderForm(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
     user_id = HiddenField()
     id = HiddenField()
+
+
+class FormTask(FlaskForm):
+    name = StringField('Name', validators=[InputRequired()])
+    folder_id = HiddenField()
+    id = HiddenField()
     
+class FormTaskState(FlaskForm):
+    state = StringField('Name', validators=[InputRequired()])
   

@@ -1,65 +1,32 @@
 {% extends "layout.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
-  title %}{% endblock %} {% block head %} {{ super() }} {% endblock %} {%
-  block content %}
-  <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
-    <div class="card">
+title %}{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block
+content %}
+<div class="container col-md-8 col-sm-12" style="max-width: 40rem">
+  <div class="card">
     <div class="card-body">
+      Name folder: {{folder.name}} {% if folder.tasks |length == 0 %}
+      <div class="my-0 mr-md-auto font-weight-normal">You dont have tasks</div>
 
-        {{folder.name}}
-        {% if  folder.tasks |length == 0 %}
-        <div class="my-0 mr-md-auto font-weight-normal">You dont have tasks  </div> 
-      
-        {% else %}
-        {% for task in task.tasks %}
-        <div class="breadcrumb">
-         <a  href="{{url_for('task_show',task_id = task.id)}}">{{ task.name }}</a>
-        </div>
-        
-         <div class="d-flex justify-content-end">
-           
-          <a class="badge badge-secondary" href="{{url_for('task_edit',task_id = task.id)}}">edit</a>
-            <form
-            action="{{url_for('task_delete',task_id = task.id)}}"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-           
-            <input
-              type="hidden"
-              id="task_id"
-              name="task_id"
-              value="{{task.id}}"
-            />
-            <button
-              type="submite"
-              class="badge badge-danger"
-              onclick="return ConfirmDelete()"
-            >
-              delete
-            </button>
-           </div>  
-             
-         <br>
-        
-        {% endfor %}
-  
-        {% endif %}
+      {% else %} {% for task in folder.tasks %}
 
-        <div class="my-0 mr-md-auto font-weight-normal">
+      <div class="breadcrumb">
+        <a href="{{url_for('task_show',task_id = task.id)}}">{{ task.name }}</a>
+      </div>
+      <div>
+        State: {% if task.state %} completed {% else %} in progess {% endif%}
+      </div>
 
+      <br />
+      {% endfor %} {% endif %}
 
-            <a class="btn btn-link" href="{{ url_for('task_new',folder_id = folder.id) }}">New task!</a>
-            
-         </div>
-
-         <script type="text/javascript">
-          function ConfirmDelete() {
-            return confirm('Are you sure?');
-          }
-        </script>
-    
-      
-       </div> 
-      </div> 
-    </div>   
-        {% endblock %}
+      <div class="my-0 mr-md-auto font-weight-normal">
+        <a
+          class="btn btn-link"
+          href="{{ url_for('task_new',folder_id = folder.id) }}"
+          >New task!</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
