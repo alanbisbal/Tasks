@@ -9,12 +9,18 @@ def index():
     """
     return render_template("task/index.html")
 
-def new():
+def new(folder_id):
+    """
+    """
+    
+    return render_template("task/new.html")
+
+def create():
     """
     """
     return render_template("task/index.html")
-
-def create():
+    
+def show():
     """
     """
     return render_template("task/index.html")
@@ -29,7 +35,7 @@ def update():
     """
     return render_template("task/index.html")
 
-def deletes():
+def delete():
     """
     """
     return render_template("task/index.html")

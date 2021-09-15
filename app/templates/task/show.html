@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+  title %}{% endblock %} {% block head %} {{ super() }} {% endblock %} {%
+  block content %}
+  <div class="container col-md-8 col-sm-12" style="max-width: 40rem">
+    <div class="card">
+    <div class="card-body">
+
+      {{task}}
+       
+    <div class="my-0 mr-md-auto font-weight-normal">
+    </div>
+
+
+         <script type="text/javascript">
+          function ConfirmDelete() {
+            return confirm('Are you sure?');
+          }
+        </script>
+    
+      
+       </div> 
+      </div> 
+    </div>   
+        {% endblock %}

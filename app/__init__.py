@@ -58,6 +58,21 @@ def create_app(environment="development"):
     app.add_url_rule("/folder/edit/<folder_id>", "folder_edit", folder.edit)
     app.add_url_rule("/folder/update","folder_update",folder.update,methods=["POST"])
     app.add_url_rule("/folder/delete","folder_delete",folder.delete, methods=["POST"])
+    
+     # Tasks 
+
+    app.add_url_rule("/index", "task_index", task.index)              
+    app.add_url_rule("/task/<folder_id>/new", "task_new", task.new)  
+    app.add_url_rule("/task/create", "task_create", task.create,methods=["POST"]) 
+    app.add_url_rule("/task/show/<task_id>", "task_show", task.show)                                     
+    app.add_url_rule("/task/edit/<task_id>", "task_edit", task.edit)
+    app.add_url_rule("/task/update","task_update",task.update,methods=["POST"])
+    app.add_url_rule("/task/delete","task_delete",task.delete, methods=["POST"])
+    
+    
+    
+    
+    
     @app.route("/")
 
     

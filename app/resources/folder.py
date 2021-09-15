@@ -17,7 +17,6 @@ def index():
 def show(folder_id):
     if not authenticated(session):
         return redirect(url_for("home"))
-    print(folder_id)
     folder = Folder.with_id(folder_id)
     return render_template("folder/show.html",folder=folder)
 
@@ -36,7 +35,6 @@ def create():
          return redirect(request.referrer)
     form.user_id.data = session["id"]
     if not form.validate_on_submit():
-        print(form.data)
         return redirect(request.referrer)
     sanitizar_input(form)
     Folder.add(form.data)
