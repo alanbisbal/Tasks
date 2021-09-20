@@ -7,6 +7,12 @@ from app.resources import auth,folder,user,task
 from app.helpers import auth as helper_auth
 from flask_bootstrap import Bootstrap
 
+from app.resources.api import folder as api_folder
+from app.resources.api import task as api_task
+
+
+from flask_cors import CORS
+
 
 
 
@@ -34,6 +40,13 @@ def create_app(environment="development"):
 
      # Funciones que se exportan al contexto de Jinja2
     app.jinja_env.globals.update(is_authenticated=helper_auth.authenticated)
+
+    
+
+    # Cors
+    CORS(app)
+    cors = CORS(app, resources={
+                r"/api/*": {"origins": "*"}}, support_credentials=True)
     
     # Autenticación   
     app.add_url_rule("/register", "auth_signin", auth.signin)
@@ -71,13 +84,21 @@ def create_app(environment="development"):
     app.add_url_rule("/task/inprogress","task_inprogress",task.inprogress, methods=["POST"])
     
     
+    app.config['JSON_AS_ASCII'] = False
     
-    
-    
+   
     @app.route("/")
 
-    
 
     def home():
         return render_template("home.html")
+
+    app.add_url_rule("/api/<id_user>/folders", "folder_api_index", api_folder.index)
+
+
+    app.add_url_rule("/api/<id_user>/folders/<id_folder>/tasks", "task_api_index", api_task.index)
+
+
+   
+
     return app

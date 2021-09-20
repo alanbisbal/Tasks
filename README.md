@@ -1,6 +1,6 @@
 # Tasks
 
-Requisito: tener instalado xampp y python para utilizar el proyecto.
+Requisito: tener instalado npm, xampp y python para utilizar el proyecto.
 
 Las versiones utilizadas son:
 -xampp v3.2.4  
@@ -21,8 +21,26 @@ Las versiones utilizadas son:
    \*direccion de ejemplo: http://localhost:82/phpmyadmin/
 
 4. python run.py para iniciar la aplicacion.
+   dirigirse a la direccion que figura en la consola
 
-5. dirigirse a la direccion que figura en la consola
+5. para consumir las apis de la aplicacion desde vuejs, deberá ubicarse dentro de:
+   carpetaDelProyecto/web
 
-6. Para finalizar, escriba en consola deactivate para desactivar el entorno
+6. luego deberá ejecutar
+
+   npm install -g @vue/cli
+
+   o
+
+   yarn global add @vue/cli
+
+7. para instalar las dependencias
+   npm/yarn install
+
+8. npm/yarn run serve
+
+   abrir el navegador con la url indicada.
+   ejemplo: http://localhost:5000/
+
+9. Para finalizar, escriba en consola deactivate para desactivar el entorno
    y pare las tareas de xampp.
