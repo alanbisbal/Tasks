@@ -20,12 +20,38 @@ def index(id_user):
         return Response(status=500)
     
     data = []
+    
     for i in folders:
         data.append({
             "folder_id": i.id,
             "name": i.name,
         })
 
-    final = json.dumps({"folder": data, "items": len(data)}, indent=2, ensure_ascii=False)
+    final = json.dumps({"folders": data,"items": len(data)}, indent=2, ensure_ascii=False)
     return Response(final, mimetype='application/json')
+
+
+
+
+def create(id_user):
+    """
+   
+    """
+    try:
+        data = request.get_json()
+        form = FormNewFolder(csrf_toke=False)
+        form.name.data = data['name']  
+        form.user_id.data = id_user
+        Folder.add(form.data)
+
+    except Exception as e:
+        data = request.get_json()
+        return Response('Server Error', status=500)
+
+    
+
+    final = json.dumps({"data": data}, indent=2)
+    return Response(final, status=201)
+
+
 

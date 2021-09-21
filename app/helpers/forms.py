@@ -38,4 +38,9 @@ class FormTask(FlaskForm):
     
 class FormTaskState(FlaskForm):
     state = StringField('Name', validators=[InputRequired()])
+
+class FormTaskNew(FlaskForm):
+    name = StringField('Name', validators=[InputRequired()])
+    folder_id = HiddenField()
+    id = HiddenField()
   

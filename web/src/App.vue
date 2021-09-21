@@ -1,32 +1,30 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <b-navbar toggleable="md" variant="dark">
+        <b-container>
+          <b-collapse id="nav-collapse" is-nav>
+              <b-nav-item :to="{ name: 'home' }" exact>Home</b-nav-item>
+              <b-nav-item :to="{ name: 'folder_index' }" exact>Folders</b-nav-item>
+            </b-collapse>
+        </b-container>
+      </b-navbar>
     </div>
-    <router-view/>
+
+    <flash-message
+      transitionIn="animated swing"
+      class="myCustomClass"
+    ></flash-message>
+    <router-view />
+
+    <footer class="footer-copyright text-center py-3">
+      <p class="p-1">
+        ToDoTask &copy; Bisbal, Alan |
+      </p>
+    </footer>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+require('vue-flash-message/dist/vue-flash-message.min.css');
+</script>

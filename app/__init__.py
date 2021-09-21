@@ -9,7 +9,7 @@ from flask_bootstrap import Bootstrap
 
 from app.resources.api import folder as api_folder
 from app.resources.api import task as api_task
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_cors import CORS
 
@@ -94,7 +94,10 @@ def create_app(environment="development"):
         return render_template("home.html")
 
     app.add_url_rule("/api/<id_user>/folders", "folder_api_index", api_folder.index)
-
+    app.add_url_rule("/api/<id_user>/folders/create",
+                     "folder_api_create",
+                     api_folder.create,
+                     methods=["POST"])
 
     app.add_url_rule("/api/<id_user>/folders/<id_folder>/tasks", "task_api_index", api_task.index)
 

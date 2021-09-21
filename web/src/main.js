@@ -1,10 +1,20 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router'; 
 
-Vue.config.productionTip = false
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import VueFlashMessage from 'vue-flash-message';
+
+
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+Vue.use(VueFlashMessage);
 
 new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+  router, // router added to the Vue instance
+  render: function(h) {
+    return h(App);
+  },
+}).$mount('#app');
