@@ -7,7 +7,7 @@
       </p>
       show tasks
     </div>
-    <myMap />
+  
   </div>
 </template>
 

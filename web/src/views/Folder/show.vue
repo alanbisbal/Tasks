@@ -1,8 +1,7 @@
 <template>
+<div>
 
-  <div>
-  <folder_index></folder_index>
-
+  <folder_show></folder_show>
 
     <div class="form-inline">
       <div class="col-auto my-1">
@@ -12,18 +11,17 @@
         
       </div>
     </div>   
-  </div>
+</div>  
 </template>
 
 <script>
 
 
-import folder_index from "@/components/Folder/index.vue";
+import folder_show from "@/components/Folder/show.vue";
 export default {
   name: 'App',
   components: {
-    folder_index,
-
+    folder_show,
   },
 
 };

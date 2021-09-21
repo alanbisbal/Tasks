@@ -53,5 +53,24 @@ def create(id_user):
     final = json.dumps({"data": data}, indent=2)
     return Response(final, status=201)
 
+def show (id_user, id_folder):
+    """
+    
 
+    """ 
+    try:
+        user = User.with_id(id_user)
+        if not user:
+            return Response('The user dont exist', status=400)
+        folder = Folder.with_id(id_folder)
+    except:
+        return Response(status=500)
+    
+    data = []
+    data.append({
+        "folder_id": folder.id,
+        "name": folder.name,
+        })
 
+    final = json.dumps({"folders": data,"items": len(data)}, indent=2, ensure_ascii=False)
+    return Response(final, mimetype='application/json')

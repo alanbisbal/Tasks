@@ -17,19 +17,26 @@ def index(id_user,id_folder):
         if not user:
             return Response('The user dont exist', status=400)
         folder = Folder.with_id(id_folder)
+        
         if (not folder in user.folders):
             return Response(status=500) 
+            
     except:
         return Response(status=500)
     
     data = []
     for i in folder.tasks:
+        state= "In progress"
+        if i.state:
+            state= "Completed"
+
         data.append({
             "task_id": i.id,
             "name": i.name,
+            "state": state
         })
 
-    final = json.dumps({"folder": data, "items": len(data)}, indent=2, ensure_ascii=False)
+    final = json.dumps({"tasks": data, "items": len(data)}, indent=2, ensure_ascii=False)
     return Response(final, mimetype='application/json')
 
 def create(id_user,id_folder):

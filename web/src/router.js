@@ -17,10 +17,21 @@ export default new Router({
       name:'folder_index',
       component: () => import('./views/Folder/index.vue')
    },
+   
+   {
+      path:'/folder_show/:id/tasks',
+      name:'task_index',
+      component: () => import('./views/Task/index.vue')
+   },
    {
       path:'/folder_new',
       name:'folder_new',
       component: () => import('./views/Folder/new.vue')
-   }
+   },
+   {
+      path:'/folder_show/:id',
+      name:'folder_show',
+      component: () => import('./views/Folder/show.vue')
+   }, 
  ]
 })

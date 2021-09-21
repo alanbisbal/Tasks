@@ -1,5 +1,5 @@
 <template>
- <new_form/>
+ <new_form></new_form>
 </template>
 
 <script>
